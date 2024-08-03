@@ -1,19 +1,58 @@
 DerpFest 14 STABLE | UNOFFICIAL ~ by @truly_irham a.k.a rpi_luver
-Build Date : 2024-06-19
+Build Date : 2024-08-02
 Device : Xiaomi 12 Pro ( dagda a.k.a zeus )
 
 
 Device Changelog:
 
-- FOD bug should be fixed entirely even after calling
-- Added single tap to wake gesture (Display > Lock Screen > Tap to check phone)
+- Fix USB debugging
+- Added Webcam option via USB and various improvement on our trees including AOD (All credits to @ArianK16a and @Adrianyyyy)
 
 
 Rom Changelog:
 
-- Merge June security patches 
-- Allowed to disable colored lockscreen clock 
-- Replace Glimpse with FossifyGallery
+- Merge QPR3 and July security patches
+- Make RCS work again 
+- Avoid some banking apps giving false positive of root
+- Disable FaceUnlock Lockouts
+- Check camera availability on camera key long press
+- Fix per-app volume on secondary users
+- Gamespace: Properly fix fps counter
+- GameSpace: Fix stopping session service in secondary users
+- GameManagerService: Fix NPE
+- Fix GameSpace on secondary users
+- LensScreenshotReceiver: Return when failed to start activity
+- Fix USB on clean flash
+- Remove bouncer user switcher toggle
+- Remove monochromatic theme
+- Allow limiting custom app actions in QS media player
+- Allow using QS media player time as next & previous
+- Updater: Catch exceptions when enabling performance mode
+- Updater: Conditionally hide performance mode toggle if unsupported due to custom kernel
+- Fix the issue where the input method cannot pop up in the parallel space after QPR3
+- Fix Bluetooth timeout feature after QPR3
+- Fix Lens activity on work profile after QPR3
+- Allow skipping mirroring confirmation dialog
+- Add mock oplus LinearmotorVibratorService
+- Switch to mkrbin for copying crash logs
+- Hide HEVC screen recording when no HW codec is available
+- Update freeze IDs for UDC QPR3 used by HbmSvManager on Pixels
+- Fix square shape button in Bluetooth QS dialog 
+- Fix availability of battery/notification light settings
+- Fix Internet Tile showing no service
+- Fix Hotspot toggle in QS internet dialog
+- Intent firewall enhancement
+- UdfpsView: Minor code improvement
+- Remove notifications sound if screen on switch 
+- PixelPropsUtils: Update fingerprint to fix play integrity and RCS again
+- Add landscape battery style
+- DerpLauncher: Always hide the keyboard when the app drawer is minimized
+- GameSpace: Don't add floating action if game closed too quickly
+- GameSpace: Show correct default settings
+- GameSpace: Enable DT2S by default
+- GameSpace: Add Disable Fastcharge switch 
+- Sync prebuilt APN's with Lineage  
+
 
 Notes:
 
@@ -33,72 +72,252 @@ Notes:
 
 Detailed Changelog:
 ====================
-    06-19-2024     
+    08-02-2024     
 ====================
 
+* device/xiaomi/dagda
+b07e02b  dagda: Drop xiaomi citsensorservice and enable light sensor notifier  [Arian]
+
+
 * hardware/xiaomi
-35bad07  vibrator: effect: Fallback to click if an effect is missing  [Adithya R]
-779d658  vibrator: effect: Create double click effect from click if necessary  [Arian]
-9a4a2b7  sensors: Implement double tap sensor  [Cosmin Tanislav]
-fff3deb  sensors: Implement single tap sensor  [Arian]
-cfff61a  sensors: Implement udfps long press sensor  [Arian]
-c2e8ae6  sensors: Let the reading of poll fd be configurable  [Arian]
-5512e9e  sensors: Create sysfs polling one shot sensor  [Cosmin Tanislav]
-219d6e8  sensors: Fix locking around setOperationMode and activate  [Cosmin Tanislav]
-adb1db6  sensors: Move one shot sensor out of main class  [Cosmin Tanislav]
-d2c4fea  sensors: Make sensor set mode operation function virtual  [Cosmin Tanislav]
-5b76c8a  sensors: Make sensor flush function virtual  [Cosmin Tanislav]
-d2c18eb  sensors: Make sensor run function virtual  [Cosmin Tanislav]
-1f5a44b  sensors: Make sensor batch function virtual  [Cosmin Tanislav]
-2c2e446  Add dummy sensors sub HAL  [Cosmin Tanislav]
+afd0037  vibrator: effect: Fallback to click if an effect is missing  [Adithya R]
+e11ef1f  vibrator: effect: Create double click effect from click if necessary  [Arian]
+a201523  sensors: Implement double tap sensor  [Cosmin Tanislav]
+65a68bc  sensors: Implement single tap sensor  [Arian]
+67f1de0  sensors: Implement udfps long press sensor  [Arian]
+58de4dc  sensors: Let the reading of poll fd be configurable  [Arian]
+0552026  sensors: Create sysfs polling one shot sensor  [Cosmin Tanislav]
+93a19d7  sensors: Fix locking around setOperationMode and activate  [Cosmin Tanislav]
+7bf4e5c  sensors: Move one shot sensor out of main class  [Cosmin Tanislav]
+525663a  sensors: Make sensor set mode operation function virtual  [Cosmin Tanislav]
+1b34894  sensors: Make sensor flush function virtual  [Cosmin Tanislav]
+a8c8485  sensors: Make sensor run function virtual  [Cosmin Tanislav]
+3693128  sensors: Make sensor batch function virtual  [Cosmin Tanislav]
+914cb42  Add dummy sensors sub HAL  [Cosmin Tanislav]
 
 
 * kernel/xiaomi/sm8450
-db17b25  Build kernel with KernelSU from main branch  [truly-irham]
+98e51b2  Build kernel with KernelSU from main branch  [truly-irham]
+
+
+* vendor/derp
+eb4c42c  Revert "kernel: Update default clang version to r510928"  [truly-irham]
 
 
 ====================
-    06-18-2024     
+    08-01-2024     
 ====================
 
-* hardware/xiaomi
-d43b640  vintf: Add extra GoodixFingerprint interfaces  [Bruno Martins]
-6677f1c  vintf: Add {goodix 2.1, fingerprintextension, motor} to fcm  [Arian]
+* device/xiaomi/sm8450-common
+e73fe18  sm8450-common: rootdir: Add sdcard1 and usbotg to recovery fstab  [someone5678]
+32dbb7e  sm8450-common: Fix battery and USB OTG detection  [ghostrider-reborn]
+792d084  sm8450-common: Load adsp_loader_dlkm for battery status in recovery  [pjgowtham]
+3a3cd36  sm8450-common: sensors: Increase _oem_msg struct size  [Arian]
+14aa7d0  sm8450-common: sensors: Add support for device specific extensions  [Arian]
+e1523de  sm8450-common: Kill xiaomi citsensorservice and sensor communicate  [Arian]
+9df41e3  sm8450-common: sensors: Introduce LightNotifier and use libssccalapi@2.0  [Arian]
+9979cb7  sm8450-common: sensors: Add aod notifier  [Arian]
+da51e23  sm8450-common: sensors: Convert nonui notifier into a generalized sensor based notifier  [Arian]
+3287ca8  sm8450-common: sensors: Close touch dev fd after usage  [Arian]
+67bff61  sm8450-common: Use kernel provided xiaomi_touch.h  [Arian]
+d954214  sm8450-common: sensors: Pass nonui value unmodified to touchscreen  [Arian]
+51f924e  sm8450-common: sensors: Use wake-up version of nonui sensor  [Arian]
+26fdc47  sm8450-common: sensors: Cleanup code and drop unused dependencies  [Arian]
+806bbcd  sm8450-common: Update blobs from diting V816.0.5.0.ULFMIXM  [Arian]
+d572bd4  sm8450-common: Drop nfc services from manifest since they have fragments  [Arian]
+c47912a  sm8450-common: Migrate to QTI USB Gadget 1.2 HIDL  [Yumi Yukimura]
+7a64f59  sm8450-common: Swap to QTI USB init scripts  [Nolen Johnson]
+7e6b180  sm8450-common: Partially revert "Move to QTI health AIDL service"  [Sebastiano Barezzi]
+fd94bc8  sm8450-common: Use soong_config_set to set xiaomi powershare variable  [Arian]
+9a5b3fe  sm8450-common: Unset BUILD_BROKEN_INCORRECT_PARTITION_IMAGES  [Bruno Martins]
+40017d3  sm8450-common: Convert WiFi firmware symlink to install_symlink target  [Bruno Martins]
+ac3ac42  sm8450-common: Mark CNE symlink target as required package  [Bruno Martins]
+1a85979  sm8450-common: Declare EGL libs as symlinks during extraction  [Bruno Martins]
+25ca68a  sm8450-common: Declare IMS and WFD libs as symlinks during extraction  [Bruno Martins]
+e58581f  sm8450-common: Move to new RFS install_symlink targets  [Bruno Martins]
+f986a2e  sm8450-common: Remove wait_for_keymaster and all references  [Paul Crowley]
+03be64b  sm8450-common: Build missing libraries for 14 QPR3  [Michael Bestas]
+
+
+* frameworks/base
+fde22cd  Merge pull request #67 from SeanDabes/spanish-translations-update  [Alexander Brunswig]
+
+
+* kernel/xiaomi/sm8450
+599bb0f  input: touchscreen: fts_spi: Disable gestures on nonui values 1 and 2  [Arian]
+f90afd6  input: touchscreen: Create exported xiaomi touch header  [Arian]
+bbf2309  input: touchscreen: xiaomi: Avoid NPE if getModeValue is not registered  [Jens Reidel]
+a36e3c5  input: touchscreen: goodix_9916: notify sysfs on single tap gestures  [Arian]
+6a23281  input: touchscreen: goodix_9916: Only notify sysfs on double click events  [Arian]
+acf380a  input: touchscreen: goodix_9916: Cleanup fod related code  [Arian]
+5bc4d02  input: touchscreen: goodix_9916: Implement single tap gesture command and drop aod_status  [Arian]
+47f8826  input: touchscreen: goodix_9916: Implement fod longpress command  [Arian]
+cb85fbb  input: touchscreen: goodix_9916: Remove fod gesture setup based on fod_status  [Arian]
+f2ae42f  input: touchscreen: goodix_9916: Use defines for touch gesture bits  [Arian]
+37f213b  input: touchscreen: fts_spi: Re-enable simplified support for thp fod downup  [Arian]
+5a0df97  input: touchscreen: fts_spi: Only notify sysfs on double click events  [Arian]
+1703b9f  input: touchscreen: fts_spi: Cleanup fod related code  [Arian]
+5f296fb  input: touchscreen: fts_spi: Implement single tap gesture command and drop aod_status  [Arian]
+1f4f6f6  input: touchscreen: fts_spi: Implement fod longpress command  [Arian]
+140c76c  input: touchscreen: fts_spi: Remove fod singletap and longpress gesture enabling based on fod_status  [Arian]
+4c1a352  input: touchscreen: fts_spi: Cleanup low power gesture entering in fts_mode_handler  [Arian]
+dbf3b3d  input: touchscreen: fts_spi: Use fts_fingerprint_is_enable for fod_status checks where possible  [Arian]
+d92b871  input: touchscreen: fts_spi: Get rid of factory code  [Arian]
+d778fc8  input: touchscreen: xiaomi: Notify sysfs when sensor enabled state changes  [Arian]
+6c6be9b  input: touchscreen: xiaomi: Add enable node for double tap sensor  [Arian]
+328b29d  input: touchscreen: xiaomi: Add double tap gesture sysfs notify node  [Fabian Leutenegger]
+3874f09  input: touchscreen: xiaomi: Add singletap gesture command  [Arian]
+363d039  input: touchscreen: xiaomi: Add fod_longpress gesture command  [Arian]
+0e5d0e62  input: fingerprint: goodix_fod: Fix duplicate input_free_device call  [Jens Reidel]
+e5dab4c  fixup!: input: fingerprint: goodix_fod: Add support for more supply configs  [Jens Reidel]
+40bff64  arm64: configs: Add dagda and taranis configs  [Arian]
+17f1d65  ARM64: configs: vendor: mondrian: Remove CONFIG_WL2866D  [Jens Reidel]
+3f2201e  ARM64: configs: vendor: diting: Remove CONFIG_WL2866D  [Jens Reidel]
+36d28ce  Revert "arm64: Add config option for wl2866d camera"  [Jens Reidel]
+d5a7f76  ARM64: configs: Add diting config  [Jens Reidel]
+03b347b  input: touchscreen: goodix_9916r: Fix screen-off FOD  [Jens Reidel]
+2e272ea  input: touchscreen: goodix_9916r: Implement FOD  [Sugakesshaa]
+d3714ed  input: touchscreen: goodix_9916r: Add support for diting  [Jens Reidel]
+66932e8  input: touchscreen: fts_spi: Add support for avdd-gpio  [Jens Reidel]
+61c1149  input: touchscreen: fts_spi: Add support for diting  [Jens Reidel]
+0e1e6a6  input: fingerprint: goodix_fod: Add support for more supply configs  [Jens Reidel]
+7f9db52  ARM64: configs: Add zizhan config  [Jens Reidel]
+0b305d3  drivers: input: goodix_tee: Disable Navigation events and key maps  [Divyanshu-Modi]
+22c01c9  drivers: input: fingerprint: Add goodix_tee driver  [Jens Reidel]
+34090a8  touchscreen: fts_dual: Add DT2W via xiaomi touchfeature to primary driver  [Jens Reidel]
+9147f7f  touchscreen: fts_dual: Adapt primary driver to match zizhan  [Jens Reidel]
+bf86a97  touchscreen: fts_dual: Import fst2 driver from google kernel modules and adjust build  [Jens Reidel]
+9307041  touchscreen: fts_dual: Adapt secondary driver to match zizhan  [Jens Reidel]
+332625b  touchscreen: fts_dual: Copy fts_spi driver to fts_dual/secondary  [Jens Reidel]
+63316d2  drivers: touchscreen: Add skeleton for fts_dual touch driver  [Jens Reidel]
+c7fd06c  ARM64: configs: Add ziyi config  [Jens Reidel]
+42923478e  input: synaptics_s3907: Reverse firmware selection logic from ziyi  [Jens Reidel]
+a6ecd56  input: synaptics_s3907: Make it compile  [Jens Reidel]
+3434abb  input: synaptics_s3907: Remove spi pinctrl setup logic  [Jens Reidel]
+52e2499  input: touchscreen: Import synaptics_s3907 driver from yuechu-t-oss  [Jens Reidel]
+898d2b5  soc: qcom: Add Xiaomi power supply integration for fsa4480  [Jens Reidel]
+43b29a6  usb: typec: tcpc: Make it compile  [Jens Reidel]
+1e5c3ef  power: supply: Import xiaomi power supply drivers from yudi-t-oss  [Jens Reidel]
+ac5c0ca  include: qti_power_supply_iio: Import Xiaomi charger defines from yudi-t-oss  [Jens Reidel]
+bd0a8e0  input: misc: Import aw8622x_haptic driver from ziyi-s-oss  [Jens Reidel]
+3b0d187  modules.list.msm.waipio: Remove modules which are not built  [Arian]
+26f1293  modules.list.msm.waipio: Add hwid.ko to modules  [Arian]
+312c418  ARM64: configs: xiaomi: Build separated soc-dtb and board-dtbos  [Cyan_Hsieh]
+983cfbd  ARM64: configs: Add cupid, marble, mayfly, mondrian, thor, unicorn and zeus config  [Arian]
+c1e0016  soc: qcom: smp2p_sleepstate: Decrease wakeup event length  [Arian]
+3a781af  media: rc: Import xiaomi changes from mayfly-s-oss  [Arian]
+00cddd4  spi: spi-msm-geni: Increase xfer timeout  [Arian]
+69626d9  input: misc: qcom-hv-haptics: Add support for garnet  [Jens Reidel]
+f679814  input: misc: qcom-hv-haptics: Import changes from yudi-t-oss  [Jens Reidel]
+5e0569f  power: supply: qti_battery_charger: Return time to full in seconds  [FlowerSea0208]
+556441f  power: supply: qti_battery_charger: Return charge counter in uAh  [ArianK16a]
+ed3777f  power: supply: qti_battery_charger: Add missing type specifiers  [Arian]
+0081ead  power: supply: qti_battery_charger: Add support for 33W reverse wireless charging  [Arian]
+51256dc  power: supply: qti_battery_charger: Add support for display port  [Arian]
+1f48c7b  power: supply: qti_battery_charger: Add config to match m81 module  [Arian]
+3be89aa  power: supply: qti_battery_charger: Replace MI_CHARGE_PROPERTY with MI_WLS_REVERSE_CHG_ONLY  [Arian]
+73f8c8a  power: supply: xiaomi: Support WIRELESS_REVERSE_CLOSE  [Arian]
+ca130c1  power: supply: qti_battery_charger: Update from garnet-t-oss  [Arian]
+4b5ba1f  power: supply: qti_battery_charger: Import xiaomi changes  [Arian]
+419691f81  power: supply: qti_battery_charger: Create header for defines, enums and structs  [Arian]
+c6d1510  power: reset: Import xiaomi changes from mayfly-s-oss  [Arian]
+b8be628  usb: Import xiaomi changes from mayfly-s-oss  [Arian]
+2727980  soc: qcom: icnss2: Import Xiaomi changes from garnet-t-oss  [Jens Reidel]
+d594a46  net: wireless: cnss2: Update xiaomi changes from garnet-t-oss  [Arian]
+2b75551  net: wireless: cnss2: Import xiaomi changes from mayfly-s-oss  [Arian]
+5efce39  Import xiaomi mtd changes from mayfly-s-oss  [Arian]
+f4e6f47  soc: qcom: fsa4480: Use mmhardware  [Arian]
+affdc4f  misc: Import mmhardware  [Arian]
+ae47486  leds: Import aw22xxx driver from mayfly-s-oss  [Arian]
+9a3309c  media: Import xiaomi camera ispv3 driver  [Jens Reidel]
+997cf07  thermal: Drop unused variables  [Arian]
+f3f1a4f  thermal: mi_thermal_interface: Add prototypes to function declarations and add missing type specifiers  [Arian]
+92ab703  thermal: Import xiaomi changes from ziyi-s-oss  [Arian]
+d99b10b  arm64: Add config option for wl2866d camera  [Arian]
+92dbeb8  wl2866d: Add missing function prototypes  [Arian]
+1af75b9  misc: Import wl2866d from mondrian-s-oss  [Arian]
+93017e2  regulator: Import wl2866d driver from mayfly-s-oss  [Arian]
+3826475  input: touchscreen: goodix_9916r: Add missing prototypes  [Jens Reidel]
+09c6f5c  input: touchscreen: goodix_9916r: Integrate properly with PM suspend  [Jens Reidel]
+f8a33bd  input: touchscreen: goodix_9916r: Hook up xiaomi_touch double tap  [Jens Reidel]
+aba24e4  input: touchscreen: goodix_9916r: Clean up and add support for marble  [Jens Reidel]
+4c101f6  input: touchscreen: Import goodix 9916r driver from gold-s-oss  [Jens Reidel]
+3f19693  input: touchscreen: goodix_9916: Only accept fod downup when fod_status is 1 or 2  [Arian]
+702c2be  input: touchscreen: goodix_9916: Don't notify about fod presses when fod_status is off  [Arian]
+ce46960  input: touchscreen: goodix_9916: Add missing function prototypes  [Arian]
+f6170ac  input: touchscreen: goodix_9916: Rename module to gt9916  [Jens Reidel]
+1203193  [WIP] input: touchscreen: goodix_9916: Reverse from stock module  [kxxt]
+b3a8d27  input: touchscreen: goodix_9916: Import new touch headers from M11  [Arian]
+7eaa88a  input: touchscreen: Import goodix_9916 from yudi-t-oss  [Arian]
+cf6d30a  input: touchscreen: fts_spi: Don't notify about fod presses when fod_status is off  [Arian]
+721cc68  input: touchscreen: fts_spi: Change enable_touch_raw argument to int  [Arian]
+0d7bbe6  input: touchscreen: fts_spi: Add prototypes to function declarations and add missing type specifiers  [Arian]
+569b1ed  input: touchscreen: fts_spi: Fix potential buffer overflows  [Arian]
+b52d2cc  input: touchscreen: fts_spi: Remove unused get_slot_trackingId method  [Arian]
+bdc352b  input: touchscreen: fts_spi: Change fts_enable_click_touch_raw to return int  [Arian]
+d327c50  input: touchscreen: fts_spi: Move back to enable_clicktouch_raw  [Arian]
+1e6209c  input: touchscreen: fts_spi: Revert knock_data to touch raw data  [Arian]
+85ec052  input: touchscreen: fts_spi: Implement THP support  [Arian]
+d3880ca  input: touchscreen: fts_spi: Update headers according to driver changes  [Arian]
+657887b  input: touchscreen: fts_spi: Add missing cmd_fifo device attr  [Arian]
+d5e65df  input: touchscreen: fts_spi: Guard touch_irq_boost  [Arian]
+0c5288b  input: touchscreen: Import fts_spi driver from mayfly-s-oss  [Arian]
+56e7ff1  input: touchscreen: xiaomi: Get rid of notify buf spam  [Arian]
+2410794  input: touchscreen: xiaomi: Add prototypes to function declarations  [Arian]
+d282421  [WIP] input: touchscreen: xiaomi: Reverse from stock module  [kxxt]
+b85cf40  Revert "input: touchscreen: xiaomi: Implement touch_thp_film"  [Arian]
+f21b54c  input: touchsreen: xiaomi: Import updated header from M11  [Arian]
+150def8  input: touchscreen: xiaomi: Implement touch_thp_mem_notify  [Arian]
+629c93d  input: touchscreen: xiaomi: Implement touch_thp_film  [Arian]
+f4ea009  input: touchscreen: xiaomi: Implement palm_sensor_data  [Arian]
+589b5b7  Revert "input: touchscreen: xiaomi: Change enable_touch_raw to work with int"  [Arian]
+e6b96fa  Revert "input: touchscreen: xiaomi: Drop clicktouch_raw"  [Arian]
+3c9596d  input: touchscreen: xiaomi: Implement tp_hal_version  [Arian]
+768e9fe  input: touchscreen: xiaomi: Implement touch_irq_no  [Arian]
+6fa5bb3  input: touchscreen: xiaomi: Implement finger_status  [Arian]
+3579dad  input: touchscreen: xiaomi: Implement touch_active_status  [Arian]
+062ed0d  input: touchscreen: xiaomi: Add XIAOMI_TOUCH_UTC_PRINT  [Arian]
+2b92e76  input: touchscreen: xiaomi: Add more THP mode types  [Arian]
+c957b7b  input: touchscreen: xiaomi: Change enable_touch_raw to work with int  [Arian]
+66d9574  input: touchscreen: xiaomi: Implement thp_cmd_data  [Arian]
+4886897  input: touchscreen: xiaomi: Move xiaomi_touch_set_suspend_state up  [Arian]
+6f0e203  input: touchscreen: xiaomi: Drop clicktouch_raw  [Arian]
+b751573  input: touchscreen: xiaomi: Implement resolution_factor  [Arian]
+c164a3c  input: touchscreen: Import xiaomi touch driver from mayfly-s-oss  [Arian]
+ce9b877  drivers: input: misc: aw86927_haptic: Replace mtk with qcom properties  [TheStrechh]
+5b5804c  input: misc: Imort aw86927_haptic driver from mayfly-s-oss  [Arian]
+816df79  input: misc: Import aw8698_haptic driver from mayfly-s-oss  [Arian]
+2e9209e  input: Import stmvl53l5 driver from garnet-t-oss  [Jens Reidel]
+4fa362b  input: fingerprint: Import goodix_3626 from marble-s-oss  [Jens Reidel]
+1223bb8  input: fingerprint: Import fpc_1540 from marble-s-oss  [Jens Reidel]
+932e10a  input: fingerprint: Import goodix_fod driver from mayfly-s-oss  [Arian]
+06145ac  misc: Introduce simplified xiaomi hardware identification driver  [Arian]
+
+
+* packages/apps/DerpLauncher
+a52c6ea  Merge pull request #25 from SeanDabes/spanish-translations-update  [Alexander Brunswig]
+
+
+* packages/apps/DerpSpace
+e0b7113  Merge pull request #45 from SeanDabes/spanish-translations-update  [Alexander Brunswig]
+
+
+* packages/apps/Settings
+0e66536  Merge pull request #31 from SeanDabes/spanish-translations-update  [Alexander Brunswig]
+f7f9247  Update Spanish Translations  [SeanDabes]
 
 
 ====================
-    06-17-2024     
+    07-31-2024     
+====================
+
+====================
+    07-30-2024     
 ====================
 
 * frameworks/base
-94870eb  core: Update freeze IDs for UDC QPR2 used by HbmSvManager  [Alvin Francis]
-ed36e0a  WiredAccessoryManager: replace every non digit character  [Francesco "Dil3mm4" Manzo]
+178a868  Update Spanish Translation  [SeanDabes]
 
 
-* packages/apps/Flash
-538f894  Automatic translation import  [LineageOS Infra]
-
-
-* packages/apps/GameSpace
-a997726  GameSpace: Apply opacity settings to menu switcher and game bar  [Pranav Vashi]
-
-
-* packages/apps/Updater
-8986be9  Automatic translation import  [LineageOS Infra]
-
-
-====================
-    06-16-2024     
-====================
-
-* packages/apps/Updater
-9eddee4  Revert "Updater: Enable A/B perf mode by default"  [NurKeinNeid]
-
-
-====================
-    06-15-2024     
-====================
-
-* packages/apps/Flash
-6ff8dbe  Flash: Add x86/x86_64 ZXing-C++ JNI libs  [LuK1337]
-93be9af  Flash: Update CameraX to 1.4.0-beta02  [LuK1337]
+* packages/apps/DerpLauncher
+c03f562  Update Spanish Translation  [SeanDabes]
